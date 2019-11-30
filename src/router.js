@@ -6,7 +6,7 @@ import {
   } from "react-router-dom";
 //components
 import Header from'header'
-import News from 'HotNews'
+import Main from 'menu_principal'
 import HotNews from 'HotNews';
 
 
@@ -14,10 +14,10 @@ class Router extends React.Component{
     render(){
         return(
             <BrowserRouter>
-                <Header/>
-                <HotNews/>
+
                 <Switch>
                     <Route exact path='/slider' component={Header}/> 
+                    <Route exact path='/' component={Main}/> 
                 </Switch>
             </BrowserRouter>
              
