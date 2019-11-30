@@ -17,6 +17,7 @@ class Router extends React.Component{
                 <Header/>
                 <HotNews/>
                 <Switch>
+                    <Route exact path='/' component={News}/> 
                     <Route exact path='/slider' component={Header}/> 
                 </Switch>
             </BrowserRouter>
