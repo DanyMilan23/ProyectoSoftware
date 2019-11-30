@@ -6,7 +6,8 @@ import {
   } from "react-router-dom";
 //components
 import Header from'header'
-import Slider from'views/Components/Sections/SectionCarousel'
+import News from 'HotNews'
+import HotNews from 'HotNews';
 
 
 class Router extends React.Component{
@@ -14,8 +15,9 @@ class Router extends React.Component{
         return(
             <BrowserRouter>
                 <Header/>
+                <HotNews/>
                 <Switch>
-                    <Route exact path='/slider' component={Slider}/> 
+                    <Route exact path='/slider' component={Header}/> 
                 </Switch>
             </BrowserRouter>
              
