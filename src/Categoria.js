@@ -12,21 +12,25 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Categoria(param) {
+export default function Categoria(parameters) {
+  console.log("Creating Categoria with: ");
+  const nombre = parameters.nombre;
+  const imagen = parameters.imagen;
+
   const classes = useStyles();
   return (
     <Card className={classes.card}>
       <CardActionArea>
         <CardMedia
           component="img"
-          alt={param.nombre}
+          alt={nombre}
           height="140"
-          image={param.imagen}
-          title={param.nombre}
+          image={imagen}
+          title={nombre}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            {param.nombre}
+            {nombre}
           </Typography>
         </CardContent>
       </CardActionArea>

@@ -28,44 +28,50 @@ function setState(newState){
 export default function PanelCategorias() {
     const classes = useStyles();
 
-    const itemsRef = fire.firestore().collection('categoria').get().then((doc) => {
-        var items = doc.data();
-        console.log("List retrieved, saving " + items + " locally")
-        let newItems = [];
-        for (let item in items) {
-            newItems.push({
-                id: item,
-                nombre: items[item].title,
-                imagen: items[item].imagen,
-                link: items[item].link
+    //const itemsRef = fire.firestore().collection('categoria').get().then((doc) => {
+    const itemsRef = fire.firestore().collection("categoria")
+        .get()
+        .then((querySnapshot) => {
+            //var items = doc.data();
+            let newItems = [];
+            console.log("List retrieved, saving " + querySnapshot + " locally")
+            querySnapshot.forEach(function(doc) {
+                const item = doc.data();
+                console.log(doc.id, " => ", doc.data());
+                newItems.push({
+                    id: doc.id,
+                    nombre: item.nombre,
+                    imagen: item.imagen,
+                    descripcion: item.descripcion
+                });
+                console.log("Saving: " + item.nombre + ", "+ item.imagen + ", "+ item.descripcion)
+                state.items = newItems;
             });
-        }
-        setState({
-            items: newItems
+        })
+        .catch(function(error) {
+            console.log("Error getting documents: ", error);
         });
-    });
 
     return (
         <div className={classes.root}>
-            <p>{state.items.length}</p>
             <Grid container spacing={3}>
                 <Grid item xs={4}>
-                    <Categoria params={state.items[0]}/>
+                    <Categoria nombre={"Categoria 1"} imagen={"https://firebasestorage.googleapis.com/v0/b/softwarecommerce23.appspot.com/o/imagen%2F9jLFvFSzCSZhE33dTLA9RJ-1200-80.jpg?alt=media&token=37419c4b-b130-4a59-a712-84de1635befe"}/>
                 </Grid>
                 <Grid item xs={4}>
-                    <Categoria params={state.items[1]}/>
+                    <Categoria nombre={"Categoria 2"} imagen={"https://firebasestorage.googleapis.com/v0/b/softwarecommerce23.appspot.com/o/imagen%2FBest-smartphone-you-can-buy-in-2018.jpg?alt=media&token=bcb78636-4c41-43a3-a20c-7027d529876c"}/>
                 </Grid>
                 <Grid item xs={4}>
-                    <Categoria params={state.items[2]}/>
+                    <Categoria nombre={"Categoria 3"} imagen={"https://firebasestorage.googleapis.com/v0/b/softwarecommerce23.appspot.com/o/imagen%2FP1073874.1419980229.0.jpg?alt=media&token=5a4ac9bf-5f8f-432c-9658-7c71bddc9b84"}/>
                 </Grid>
                 <Grid item xs={4}>
-                    <Categoria params={state.items[3]}/>
+                    <Categoria nombre={"Categoria 4"} imagen={"https://firebasestorage.googleapis.com/v0/b/softwarecommerce23.appspot.com/o/imagen%2Fdc-Cover-0ka5la6aaburq6um01vgq508j0-20170112202310.Medi.jpeg?alt=media&token=d97a799b-20f1-4877-8ffe-3fa95ce15d8a"}/>
                 </Grid>
                 <Grid item xs={4}>
-                    <Categoria params={state.items[4]}/>
+                    <Categoria nombre={"Categoria 5"} imagen={"https://firebasestorage.googleapis.com/v0/b/softwarecommerce23.appspot.com/o/imagen%2Fnokia-7-plus-07.jpg?alt=media&token=0d6351da-d1ab-4027-8ff2-20ce2d4c97e3"}/>
                 </Grid>
                 <Grid item xs={4}>
-                    <Categoria params={state.items[5]}/>
+                    <Categoria nombre={"Categoria 6"} imagen={"https://firebasestorage.googleapis.com/v0/b/softwarecommerce23.appspot.com/o/imagen%2Ftecnologia.jpg?alt=media&token=bc14d7a3-86a2-4058-86fa-74635d25d720"}/>
                 </Grid>
             </Grid>
         </div>
