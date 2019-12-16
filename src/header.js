@@ -1,4 +1,5 @@
 import React from "react";
+import firebase from "firebase.config"
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
@@ -17,14 +18,35 @@ import styles from "assets/jss/material-kit-react/views/componentsSections/navba
 
 const useStyles = makeStyles(styles);
 
+function submitForm(){
+  var provider = new firebase.auth.GoogleAuthProvider();
+  firebase.auth().signInWithPopup(provider).then(function(result) {
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    var token = result.credential.accessToken;
+    // The signed-in user info.
+    var user = result.user;
+    // ...
+  }).catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // The email of the user's account used.
+    var email = error.email;
+    // The firebase.auth.AuthCredential type that was used.
+    var credential = error.credential;
+    // ...
+  });
+}
 export default function SectionNavbars() {
   const classes = useStyles();
+  
+  
   return (
     <div className={classes.section}>
       <div id="navbar" className={classes.navbar}>
         <div
           className={classes.navigation}
-          style={{ backgroundImage: "url(" + image + ")" }}
+         
         >
           <Header
             color="white"         
@@ -54,9 +76,11 @@ export default function SectionNavbars() {
                 <ListItem className={classes.listItem}>
                   <Button
                     color="transparent"
+                    
                     className={
                       classes.navLink + " " + classes.socialIconsButton
                     }
+                    onClick={submitForm}
                   >
                     <PersonOutlineTwoToneIcon/>
                     {" "}

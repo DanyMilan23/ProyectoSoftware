@@ -7,7 +7,7 @@ import {
 //components
 import Header from'header'
 import Main from 'menu_principal'
-import HotNews from 'HotNews';
+import HotNews from 'views/Components/Components';
 
 
 class Router extends React.Component{
@@ -16,7 +16,7 @@ class Router extends React.Component{
             <BrowserRouter>
 
                 <Switch>
-                    <Route exact path='/slider' component={Header}/> 
+                    <Route exact path='/slider' component={HotNews}/> 
                     <Route exact path='/' component={Main}/> 
                 </Switch>
             </BrowserRouter>
